@@ -11,7 +11,15 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
+        if cls is not None:
+            if type(cls) == str:
+                cls = eval(cls)
+            cls_dict = {}
+            for k, v in self.__objects.items():
+                if type(v) == cls:
+                    cls_dict[k] = v
+            return cls_dict
         return self.__objects
 
     def new(self, obj):
