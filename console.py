@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 
+class HBNBCommmand
+
 """
 import cmd
 import json
@@ -14,6 +16,26 @@ from models.place import Place
 from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
+    """
+
+    contains the entry point of the command interpreter
+
+    Attributes:
+        prompt
+        classes:classes in module
+
+    Methods:
+        do_quit:exit
+        do_EOF:exit
+        do_help:show documented and undocumented commands
+        do_create:create instance
+        do_show:show instance based on name and id
+        do_destroy:delete instance based on name and id
+        do_all:print string representation of all instances
+        do_update:updates an instance based on name and id
+
+    """
+
     prompt = '(hbnb) '
     __classes = {
         "BaseModel",
@@ -40,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
+        """Creates a new instance of BaseModel"""
         args = line.split(" ")
         if not line:
             print("** class name missing **")
@@ -51,6 +74,7 @@ class HBNBCommand(cmd.Cmd):
             print(obj.id)
 
     def do_show(self, line):
+        """ Prints the string representation of an instance """
         args = line.split(" ")
         b = storage.all()
         if not line:
@@ -68,6 +92,7 @@ class HBNBCommand(cmd.Cmd):
                     print(b[key])
 
     def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
         args = line.split(" ")
         b = storage.all()
         if not line:
@@ -86,6 +111,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, line):
+        """Prints all string representation of all instances """
         if not line:
             b = storage.all()
             print([b[k].__str__() for k in b])
@@ -101,6 +127,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, line):
+        """Updates an instance based on the class name and id"""
         args = line.split(" ")
         b = storage.all()
         if len(args) == 0:
@@ -130,5 +157,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             setattr(c, args[2], value)
         c.save()
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
