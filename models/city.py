@@ -8,6 +8,7 @@ class City:inherits from class BaseModel
 from models.base_model import BaseModel
 import json
 
+
 class City(BaseModel):
     """
 
@@ -20,4 +21,3 @@ class City(BaseModel):
     """
     state_id = ""
     name = ""
-    

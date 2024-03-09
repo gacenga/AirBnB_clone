@@ -8,6 +8,7 @@ class Review:inherits from class BaseModel
 from models.base_model import BaseModel
 import json
 
+
 class Review(BaseModel):
     """
 

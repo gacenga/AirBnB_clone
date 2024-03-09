@@ -8,6 +8,7 @@ class Amenity:inherits from class BaseModel
 from models.base_model import BaseModel
 import json
 
+
 class Amenity(BaseModel):
     """
 

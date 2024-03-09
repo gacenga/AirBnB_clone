@@ -14,6 +14,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage():
     """
 
@@ -32,7 +33,7 @@ class FileStorage():
         save(self):
             serializes __objects to the JSON file (path: __file_path)
         reload(self):
-            deserializes the JSON file to __objects 
+            deserializes the JSON file to __objects
     """
     __file_path = "file.json"
     __objects = {}
@@ -67,11 +68,17 @@ class FileStorage():
     def save(self):
         """
 
-        serializes __objects to the JSON file 
+        serializes __objects to the JSON file
 
         """
         with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump({k: v.to_dict() if hasattr(v, 'to_dict') else v for k, v in self.__objects.items()}, file)
+            json.dump(
+                {
+                    k: v.to_dict() if hasattr(v, 'to_dict') else v
+                    for k, v in self.__objects.items()
+                },
+                file
+            )
 
     def reload(self):
         """

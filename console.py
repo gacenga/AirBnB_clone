@@ -15,6 +15,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """
 
@@ -149,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         c = b["{}.{}".format(args[0], args[1])]
-        value = (args[3]).strip('"')        
+        value = (args[3]).strip('"')
         if hasattr(c, args[2]):
             attribute_type = type(getattr(c, args[2]))
             casted_value = attribute_type(value)
@@ -157,6 +158,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             setattr(c, args[2], value)
         c.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

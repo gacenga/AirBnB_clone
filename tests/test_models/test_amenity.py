@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+
+import unittest
+from models.amenity import Amenity
+
+class TestAmenity(unittest.TestCase):
+
+    def test_attributes(self):
+        amenity = Amenity()
+        self.assertTrue(hasattr(amenity, "name"))
+
+    def test_attribute_type(self):
+        amenity = Amenity()
+        self.assertIsInstance(amenity.name, str)
+
+if __name__ == '__main__':
+    unittest.main()

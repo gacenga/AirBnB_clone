@@ -7,6 +7,7 @@ Class BaseModel
 import uuid
 from datetime import datetime
 
+
 class BaseModel():
     """
     class BaseModel
@@ -40,13 +41,13 @@ class BaseModel():
             **kwargs:key word arguments
 
         """
-        DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+        DATE_TIME = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
                     continue
                 if key in ('created_at', 'updated_at'):
-                    self.__dict__[key] = datetime.strptime(value, DATE_TIME_FORMAT)
+                    self.__dict__[key] = datetime.strptime(value, DATE_TIME)
                 elif key[0] == 'id':
                     self.__dict__[key] = str(value)
                 else:
@@ -57,12 +58,14 @@ class BaseModel():
             self.updated_at = self.created_at
             self.id = str(uuid.uuid4())
             storage.new(self)
+
     def __str__(self):
         """
         returns a string representation of an instance
         """
         class_name = self.__class__.__name__
         return f"[{class_name}] ({self.id}) {self.__dict__}"
+
     def save(self):
         """
         updates the public instance attribute updated_at
@@ -70,6 +73,7 @@ class BaseModel():
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
+
     def to_dict(self):
         """
         returns a dictionary containing all keys/values
@@ -79,4 +83,4 @@ class BaseModel():
         instance_dict['created_at'] = self.created_at.isoformat()
         instance_dict['updated_at'] = self.updated_at.isoformat()
         class_name = self.__class__.__name__
-        return {'__class__':class_name, **instance_dict}
+        return {'__class__': class_name, **instance_dict}
